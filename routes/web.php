@@ -18,7 +18,8 @@ use App\Http\Controllers\FrontendController;
 //     return view('welcome');
 // });
 
-Route::get('/', [FrontendController::class, 'index']);
+Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
+Route::get('/cart', [FrontendController::class, 'cart']);
 
 Route::middleware([
     'auth:sanctum',
