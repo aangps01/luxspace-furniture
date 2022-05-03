@@ -1,5 +1,5 @@
 <!-- START: HEADER -->
-<header class="absolute w-full z-50 px-4">
+<header class="{{ (Request::is('/') ? 'absolute' : '') }} w-full z-50 px-4">
     <div class="container mx-auto py-5">
         <div class="flex flex-stretch items-center">
             <div class="w-56 items-center flex">
