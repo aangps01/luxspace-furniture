@@ -33,3 +33,12 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+    Route::middleware(['admin'])->group(function () {
+        // admin routes
+    });
+});
