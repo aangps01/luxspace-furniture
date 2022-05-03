@@ -18,9 +18,11 @@ use App\Http\Controllers\FrontendController;
 //     return view('welcome');
 // });
 
-Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
-Route::get('/cart', [FrontendController::class, 'cart']);
-Route::get('/details/{slug}', [FrontendController::class, 'details']);
+Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::get('/cart', [FrontendController::class, 'cart'])->name('cart');
+Route::get('/details/{slug}', [FrontendController::class, 'details'])->name('details');
+Route::get('/checkout/success', [FrontendController::class, 'success'])->name('chekout-success');
+
 
 Route::middleware([
     'auth:sanctum',

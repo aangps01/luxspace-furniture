@@ -12,19 +12,19 @@
                     id="menu">
                     <li class="mx-3 py-6 md:py-0">
                         <a href="#"
-                            class="text-black {{ (Request::is('cart') || Request::is('details/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Showcase</a>
+                            class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Showcase</a>
                     </li>
                     <li class="mx-3 py-6 md:py-0">
                         <a href="#"
-                            class="text-black {{ (Request::is('cart') || Request::is('details/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Catalog</a>
+                            class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Catalog</a>
                     </li>
                     <li class="mx-3 py-6 md:py-0">
                         <a href="#"
-                            class="text-black {{ (Request::is('cart') || Request::is('details/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Delivery</a>
+                            class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Delivery</a>
                     </li>
                     <li class="mx-3 py-6 md:py-0">
                         <a href="#"
-                            class="text-black {{ (Request::is('cart') || Request::is('details/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Rewards</a>
+                            class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Rewards</a>
                     </li>
                 </ul>
             </div>

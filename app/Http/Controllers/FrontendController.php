@@ -21,4 +21,9 @@ class FrontendController extends Controller
     {
         return view('pages.details');
     }
+
+    public function success()
+    {
+        return view('pages.success');
+    }
 }
