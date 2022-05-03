@@ -20,6 +20,7 @@ use App\Http\Controllers\FrontendController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
 Route::get('/cart', [FrontendController::class, 'cart']);
+Route::get('/details/{slug}', [FrontendController::class, 'details']);
 
 Route::middleware([
     'auth:sanctum',

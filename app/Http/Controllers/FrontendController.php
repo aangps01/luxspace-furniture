@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -14,5 +15,10 @@ class FrontendController extends Controller
     public function cart()
     {
         return view('pages.cart');
+    }
+
+    public function details(Product $product)
+    {
+        return view('pages.details');
     }
 }
