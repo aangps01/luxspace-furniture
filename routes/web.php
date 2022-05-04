@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
 
 /*
@@ -31,14 +32,15 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dashboard.index');
 });
 
 
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    // Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     Route::middleware(['admin'])->group(function () {
         // admin routes
+        Route::resource('product', ProductController::class);
     });
 });
