@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -47,9 +49,18 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $slug = Str::slug($request->name);
+        try {
+            $product = new Product($validated);
+            $product->slug = $slug;
+            $product->save();
+        } catch (\Throwable $th) {
+            return redirect()->route('dashboard.product.index')->with('error', 'Failed to save data' . $th->getMessage());
+        }
+        return redirect()->route('dashboard.product.index')->with('success', 'Successfully Added');
     }
 
     /**
