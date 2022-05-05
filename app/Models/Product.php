@@ -18,6 +18,11 @@ class Product extends Model
         'slug',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function productGalleries()
     {
         return $this->hasMany(ProductGallery::class);

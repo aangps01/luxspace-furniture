@@ -19,10 +19,11 @@ class ProductController extends Controller
         if (request()->ajax()) {
             return datatables()->of(Product::query())
                 ->addColumn('action', function ($data) {
-                    $button = '<button type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm">Edit</button>';
-                    $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">Delete</button>';
-                    return $button;
+                    return '
+                        <a href="' . route('dashboard.product.edit', $data->slug) . '" class="">
+                            Edit
+                        </a>
+                   ';
                 })
                 ->editColumn('price', function ($data) {
                     return number_format($data->price);
@@ -80,9 +81,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('pages.dashboard.product.edit', compact('product'));
     }
 
     /**
@@ -92,9 +93,16 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $validated = $request->validated();
+        $validated['slug'] = Str::slug($request->name);
+        try {
+            $product->update($validated);
+        } catch (\Throwable $th) {
+            return redirect()->route('dashboard.product.index')->with('error', 'Failed to save data' . $th->getMessage());
+        }
+        return redirect()->route('dashboard.product.index')->with('success', 'Successfully Updated');
     }
 
     /**

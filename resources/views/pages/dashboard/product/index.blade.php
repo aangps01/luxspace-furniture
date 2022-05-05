@@ -26,6 +26,9 @@
             @if(Session::has('error'))
             @include('components.toast.danger', ['message' => Session::get('error')])
             @endif
+            @if(Session::has('success'))
+            @include('components.toast.success', ['message' => Session::get('success')])
+            @endif
             <div class="mb-10">
                 <a href="{{ route('dashboard.product.create') }}"
                     class="bg-green-400 hover:bg-green-600 font-bold py-2 px-4 rounded shadow-lg">
