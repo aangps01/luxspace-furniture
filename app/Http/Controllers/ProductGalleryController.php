@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\ProductGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +14,7 @@ class ProductGalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Product $product)
     {
         if (request()->ajax()) {
             $query = ProductGallery::query();
@@ -37,7 +38,7 @@ class ProductGalleryController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('pages.dashboard.product-gallery.index');
+        return view('pages.dashboard.product-gallery.index', compact('product'));
     }
 
     /**
