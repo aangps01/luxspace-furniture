@@ -26,7 +26,7 @@ class ProductController extends Controller
                         <form action="' . route('dashboard.product.destroy', $data->slug) . '" method="POST" class="inline-block">
                             ' . csrf_field() . '
                             ' . method_field('DELETE') . '
-                            <button class="bg-red-500 text-white rounded-md px-2 py-1 m-2">Delete</button>
+                            <button class="bg-red-500 text-white rounded-md px-2 py-1 m-[8px]">Delete</button>
                         </form>
                    ';
                 })
