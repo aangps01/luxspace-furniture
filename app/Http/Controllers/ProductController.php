@@ -20,9 +20,14 @@ class ProductController extends Controller
             return datatables()->of(Product::query())
                 ->addColumn('action', function ($data) {
                     return '
-                        <a href="' . route('dashboard.product.edit', $data->slug) . '" class="">
+                        <a href="' . route('dashboard.product.edit', $data->slug) . '" class="bg-gray-500 text-white rounded-md px-2 py-1 m-2">
                             Edit
                         </a>
+                        <form action="' . route('dashboard.product.destroy', $data->slug) . '" method="POST" class="inline-block">
+                            ' . csrf_field() . '
+                            ' . method_field('DELETE') . '
+                            <button class="bg-red-500 text-white rounded-md px-2 py-1 m-2">Delete</button>
+                        </form>
                    ';
                 })
                 ->editColumn('price', function ($data) {
@@ -111,8 +116,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        try {
+            $product->delete();
+        } catch (\Throwable $th) {
+            return redirect()->route('dashboard.product.index')->with('error', 'Failed to delete data' . $th->getMessage());
+        }
+        return redirect()->route('dashboard.product.index')->with('success', 'Successfully Deleted data');
     }
 }

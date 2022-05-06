@@ -1,5 +1,4 @@
-<div id="toast-danger"
-    class="flex items-center w-full bg-red-500 max-w-xs p-4 mb-4 text-gray-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+<div id="toast-danger" class="flex items-center w-full bg-red-500 max-w-xs p-4 mb-4 text-white rounded-lg shadow"
     role="alert">
     <div
         class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
