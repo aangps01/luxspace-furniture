@@ -43,6 +43,6 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
     Route::middleware(['admin'])->group(function () {
         // admin routes
         Route::resource('product', ProductController::class)->except(['show']);
-        Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only(['index', 'create', 'store', 'destroy']);
+        Route::resource('product.gallery', ProductGalleryController::class)->shallow();
     });
 });

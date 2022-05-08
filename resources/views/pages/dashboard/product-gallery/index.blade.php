@@ -30,10 +30,11 @@
             @include('components.toast.success', ['message' => Session::get('success')])
             @endif
             <div class="mb-10">
-                <a href="{{ route('dashboard.product.gallery.create', " .$product->id.") }}"
+                <form action="{{ route('dashboard.product.gallery.store') }}">
+                    input:
                     class="bg-green-400 hover:bg-green-600 font-bold py-2 px-4 rounded shadow-lg">
                     + Upload Photos
-                </a>
+                </form>
             </div>
             <div class="shadow overflow-hidden sm-rounded-md">
                 <div class="px-4 py-5 bg-white sm:p-6">
