@@ -16,6 +16,7 @@
     <!--- Tambahkan setelah app.css --->
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /*Form fields*/
         .dataTables_wrapper select,

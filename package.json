@@ -22,5 +22,8 @@
     },
     "dependencies": {
         "flowbite": "^1.4.5"
+    },
+    "resolutions": {
+        "autoprefixer": "10.4.5"
     }
 }

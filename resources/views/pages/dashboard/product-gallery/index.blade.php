@@ -30,10 +30,11 @@
             @include('components.toast.success', ['message' => Session::get('success')])
             @endif
             <div class="mb-10">
-                <form action="{{ route('dashboard.product.gallery.store') }}">
-                    input:
-                    class="bg-green-400 hover:bg-green-600 font-bold py-2 px-4 rounded shadow-lg">
-                    + Upload Photos
+                <form action="{{ route('dashboard.product.gallery.store', " .$product->slug</form>.") }}"
+                enctype="multipart/form-data">
+                <input type="files" name="files[]" class="">
+                class="bg-green-400 hover:bg-green-600 font-bold py-2 px-4 rounded shadow-lg">
+                + Upload Photos
                 </form>
             </div>
             <div class="shadow overflow-hidden sm-rounded-md">
