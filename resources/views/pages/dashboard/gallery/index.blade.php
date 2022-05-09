@@ -44,7 +44,7 @@
             @include('components.toast.success', ['message' => Session::get('success')])
             @endif
             <div class="mb-10">
-                <a href="{{ route('dashboard.product.gallery.create', $product->id) }}"
+                <a href="{{ route('dashboard.product.gallery.create', $product->slug) }}"
                     class="bg-green-400 hover:bg-green-600 font-bold py-2 px-4 rounded shadow-lg">+ Upload Photos</a>
             </div>
             <div class="shadow overflow-hidden sm-rounded-md mb-3">

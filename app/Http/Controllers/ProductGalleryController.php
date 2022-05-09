@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductGalleryRequest;
 use App\Models\Product;
 use App\Models\ProductGallery;
 use Illuminate\Http\Request;
@@ -33,19 +34,9 @@ class ProductGalleryController extends Controller
                     return '<img src="' . Storage::url($data->url) . '" style="max-width: 180px">';
                 })
                 ->editColumn('is_featured', function ($data) {
-                    $is_checked = $data->is_featured ? 'checked' : '';
-                    return '
-                    <form action="' . route('dashboard.gallery.update', $data->id) . '" method="POST">
-                        ' . csrf_field() . '
-                        ' . method_field('PUT') . '
-                        <label for="default-toggle-' . $data->id . '" class="inline-flex relative items-center cursor-pointer">
-                        <input type="checkbox" name="is_featured" id="default-toggle-' . $data->id . '" class="sr-only peer "' . $is_checked . ' onChange="this.form.submit()">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[' . "''" . '] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                        </label>
-                    </form>
-                    ';
+                    return $data->is_featured ? 'Yes' : 'No';
                 })
-                ->rawColumns(['action', 'url', 'is_featured'])
+                ->rawColumns(['action', 'url'])
                 ->make(true);
         }
         return view('pages.dashboard.gallery.index', compact('product'));
@@ -56,9 +47,9 @@ class ProductGalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Product $product)
     {
-        //
+        return view('pages.dashboard.gallery.create', compact('product'));
     }
 
     /**
@@ -67,9 +58,19 @@ class ProductGalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductGalleryRequest $request, Product $product)
     {
-        //
+        $files = $request->file('files');
+        if ($request->hasFile('files')) {
+            foreach ($files as $file) {
+                $path = $file->store('public/gallery');
+                ProductGallery::create([
+                    'product_id' => $product->id,
+                    'url' => $path,
+                ]);
+            }
+        }
+        return redirect()->route('dashboard.product.gallery.index', $product->slug);
     }
 
     /**
