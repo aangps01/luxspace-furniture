@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ProductGalleryController;
 
 /*
@@ -49,5 +50,6 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
             'store',
             'destroy'
         ]);
+        Route::resource('transaction', TransactionController::class);
     });
 });
