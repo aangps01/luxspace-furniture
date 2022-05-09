@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Product &raquo; {{ $product->name }} &raquo Edit;
+            Product &raquo; {{ $product->name }} &raquo; Gallery
         </h2>
     </x-slot>
 
@@ -15,10 +15,24 @@
                     {data: 'id', name: 'id', width: '5%'},
                     {data: 'url', name: 'url'},
                     {data: 'is_featured', name: 'is_featured'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false, width: '10%'},
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false,
+                        width: '10%'
+                    },
                 ]
             });
         </script>
+    </x-slot>
+
+    <x-slot name="style">
+        <style>
+            td {
+                text-align: center;
+            }
+        </style>
     </x-slot>
 
     <div class="py-12">
@@ -30,14 +44,10 @@
             @include('components.toast.success', ['message' => Session::get('success')])
             @endif
             <div class="mb-10">
-                <form action="{{ route('dashboard.product.gallery.store', " .$product->slug</form>.") }}"
-                enctype="multipart/form-data">
-                <input type="files" name="files[]" class="">
-                class="bg-green-400 hover:bg-green-600 font-bold py-2 px-4 rounded shadow-lg">
-                + Upload Photos
-                </form>
+                <a href="{{ route('dashboard.product.gallery.create', $product->id) }}"
+                    class="bg-green-400 hover:bg-green-600 font-bold py-2 px-4 rounded shadow-lg">+ Upload Photos</a>
             </div>
-            <div class="shadow overflow-hidden sm-rounded-md">
+            <div class="shadow overflow-hidden sm-rounded-md mb-3">
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <table id="crudTable">
                         <thead>
@@ -51,6 +61,8 @@
                     </table>
                 </div>
             </div>
+            <a href="{{ route('dashboard.product.index') }}" class="text-sm underline">
+                &slarr; Back to products</a>
         </div>
     </div>
 </x-app-layout>

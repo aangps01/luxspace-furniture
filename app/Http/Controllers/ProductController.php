@@ -20,6 +20,9 @@ class ProductController extends Controller
             return datatables()->of(Product::query())
                 ->addColumn('action', function ($data) {
                     return '
+                        <a href="' . route('dashboard.product.gallery.index', $data->slug) . '" class="bg-yellow-500 text-white rounded-md px-2 py-1 m-2">
+                            Gallery
+                        </a>
                         <a href="' . route('dashboard.product.edit', $data->slug) . '" class="bg-gray-500 text-white rounded-md px-2 py-1 m-2">
                             Edit
                         </a>
