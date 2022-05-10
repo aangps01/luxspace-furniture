@@ -26,6 +26,22 @@
                         <a href="#"
                             class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Rewards</a>
                     </li>
+                    @auth
+                    <li class="mx-3 py-6 md:py-0">
+                        <a href="#"
+                            class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Rewards</a>
+                    </li>
+                    @endauth
+                    @guest
+                    <li class="mx-3 py-6 md:py-0">
+                        <a href="#"
+                            class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Rewards</a>
+                    </li>
+                    <li class="mx-3 py-6 md:py-0">
+                        <a href="#"
+                            class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Rewards</a>
+                    </li>
+                    @endguest
                 </ul>
             </div>
             <div class="w-auto">

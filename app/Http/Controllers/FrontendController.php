@@ -9,7 +9,9 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        return view('pages.index');
+        $products = Product::with('productGalleries')->latest()->get();
+        // dd($products);
+        return view('pages.index', compact('products'));
     }
 
     public function cart()
