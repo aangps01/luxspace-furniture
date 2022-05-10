@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ProductGalleryController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,5 +52,6 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
             'destroy'
         ]);
         Route::resource('transaction', TransactionController::class);
+        Route::resource('user', UserController::class);
     });
 });

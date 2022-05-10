@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Product &raquo; {{ $product->name }} &raquo; Edit
+            User &raquo; {{ $user->name }} &raquo; Edit
         </h2>
     </x-slot>
 
@@ -23,7 +23,7 @@
                 </div>
             </div>
             @endif
-            <form class="w-full" action="{{ route('dashboard.product.update', $product->slug) }}" method="POST">
+            <form class="w-full" action="{{ route('dashboard.user.update', $user->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="flex flex-wrap -mx-3 mb-6">
@@ -32,38 +32,40 @@
                             for="grid-last-name">
                             Name
                         </label>
-                        <input value="{{ old('name') ?? $product->name }}" name="name"
+                        <input value="{{ old('name') ?? $user->name }}" name="name"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-last-name" type="text" placeholder="Product Name">
-                    </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="description">
-                            Description
-                        </label>
-                        <textarea name="description"
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="description" type="text"
-                            placeholder="Product Description">{!! old('description') ?? $product->description !!}</textarea>
+                            id="grid-last-name" type="text" placeholder="user Name">
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="price">
-                            Price
+                            Email
                         </label>
-                        <input value="{{ old('price') ?? $product->price }}" id="price" type="number"
-                            placeholder="Product Price" name="price"
+                        <input value="{{ old('email') ?? $user->email }}" id="email" type="text"
+                            placeholder="user email" name="email"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="price">
+                            Email
+                        </label>
+                        <select name="roles"
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                            <option value="{{ $user->roles }}">{{ $user->roles }}</option>
+                            <option disabled>-----------------</option>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="USER">USER</option>
+                        </select>
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full px-3 text-right">
                         <button type="submit"
                             class=" shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                            Update Product
+                            Update user
                         </button>
                     </div>
                 </div>
