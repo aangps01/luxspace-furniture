@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\TransactionItem;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -62,9 +63,18 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Transaction $transaction)
     {
-        //
+        if (request()->ajax()) {
+            $query = TransactionItem::with('product')->where('transaction_id', $transaction->id);
+            return datatables()->of($query)
+                ->editColumn('product.price', function ($data) {
+                    return 'Rp. ' . number_format($data->product->price);
+                })
+                ->make(true);
+        }
+
+        return view('pages.dashboard.transaction.show', compact('transaction'));
     }
 
     /**
