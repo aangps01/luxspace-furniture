@@ -104,7 +104,7 @@ class TransactionController extends Controller
         try {
             $transaction->update($validated);
         } catch (\Throwable $th) {
-            return redirect()->route('dashboard.transaction.index')->with('failed', 'Failed to update data' . $th->getMessage());
+            return redirect()->route('dashboard.transaction.index')->with('failed', 'Failed to update data');
         }
         return redirect()->route('dashboard.transaction.index')->with('success', 'Successfully updated status');
     }

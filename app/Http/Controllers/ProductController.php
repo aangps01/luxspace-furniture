@@ -67,7 +67,7 @@ class ProductController extends Controller
             $product->slug = $slug;
             $product->save();
         } catch (\Throwable $th) {
-            return redirect()->route('dashboard.product.index')->with('error', 'Failed to save data' . $th->getMessage());
+            return redirect()->route('dashboard.product.index')->with('error', 'Failed to save data');
         }
         return redirect()->route('dashboard.product.index')->with('success', 'Successfully Added');
     }
@@ -108,7 +108,7 @@ class ProductController extends Controller
         try {
             $product->update($validated);
         } catch (\Throwable $th) {
-            return redirect()->route('dashboard.product.index')->with('error', 'Failed to save data' . $th->getMessage());
+            return redirect()->route('dashboard.product.index')->with('error', 'Failed to save data');
         }
         return redirect()->route('dashboard.product.index')->with('success', 'Successfully Updated');
     }
@@ -124,7 +124,7 @@ class ProductController extends Controller
         try {
             $product->delete();
         } catch (\Throwable $th) {
-            return redirect()->route('dashboard.product.index')->with('error', 'Failed to delete data' . $th->getMessage());
+            return redirect()->route('dashboard.product.index')->with('error', 'Failed to delete data');
         }
         return redirect()->route('dashboard.product.index')->with('success', 'Successfully Deleted data');
     }
