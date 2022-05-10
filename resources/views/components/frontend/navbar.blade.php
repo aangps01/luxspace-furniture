@@ -28,18 +28,15 @@
                     </li>
                     @auth
                     <li class="mx-3 py-6 md:py-0">
-                        <a href="#"
-                            class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Rewards</a>
+                        <a href="{{ route('dashboard.index') }}" class="md:text-white hover:underline">Dashboard</a>
                     </li>
                     @endauth
                     @guest
                     <li class="mx-3 py-6 md:py-0">
-                        <a href="#"
-                            class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Rewards</a>
+                        <a href="{{ route('login') }}" class="md:text-white hover:underline">Login</a>
                     </li>
                     <li class="mx-3 py-6 md:py-0">
-                        <a href="#"
-                            class="text-black {{ (Request::is('cart') || Request::is('details/*') || Request::is('checkout/*') ? 'md:text-black' : 'md:text-white') }} hover:underline">Rewards</a>
+                        <a href="{{ route('register') }}" class="md:text-white hover:underline">Register</a>
                     </li>
                     @endguest
                 </ul>
