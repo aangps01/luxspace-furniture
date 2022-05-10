@@ -102,8 +102,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+        } catch (\Throwable $th) {
+            return redirect()->route('dashboard.user.index')->with('failed', 'Failed to delete data');
+        }
+        return redirect()->route('dashboard.user.index')->with('success', 'Successfully deleted');
     }
 }
