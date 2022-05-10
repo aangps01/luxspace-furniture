@@ -24,7 +24,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/cart', [FrontendController::class, 'cart'])->name('cart');
-Route::get('/details/{slug}', [FrontendController::class, 'details'])->name('details');
+Route::get('/details/{product}', [FrontendController::class, 'details'])->name('details');
 Route::get('/checkout/success', [FrontendController::class, 'success'])->name('chekout-success');
 
 

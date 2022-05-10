@@ -21,7 +21,9 @@ class FrontendController extends Controller
 
     public function details(Product $product)
     {
-        return view('pages.details');
+        $product->load('productGalleries');
+        $recommendations = Product::with('productGalleries')->inRandomOrder()->take(4)->get();
+        return view('pages.details', compact('product', 'recommendations'));
     }
 
     public function success()

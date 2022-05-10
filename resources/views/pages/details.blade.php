@@ -6,7 +6,7 @@
     <div class="container mx-auto">
         <ul class="breadcrumb">
             <li>
-                <a href="index.html">Home</a>
+                <a href="{{ route('index') }}">Home</a>
             </li>
             <li>
                 <a href="#">Office Room</a>
@@ -23,59 +23,37 @@
 <section class="container mx-auto">
     <div class="flex flex-wrap my-4 md:my-12">
         <div class="w-full md:hidden px-4">
-            <h2 class="text-5xl font-semibold">Chair Thatty</h2>
-            <span class="text-xl">IDR 12.000.000</span>
+            <h2 class="text-5xl font-semibold">{{ $product->name }}</h2>
+            <span class="text-xl">IDR {{ number_format($product->price) }}</span>
         </div>
         <div class="flex-1">
             <div class="slider">
                 <div class="thumbnail">
+                    @foreach ($product->productGalleries as $gallery)
                     <div class="px-2">
-                        <div class="item selected"
-                            data-img="{{ asset('frontend/images/content/showcase-1.front.jpg') }}">
-                            <img src="{{ asset('frontend/images/content/showcase-1.front.jpg') }}" alt="front"
+                        <div class="item {{ $loop->first ? 'selected' : '' }}"
+                            data-img="{{ Storage::url($gallery->url) }}">
+                            <img src="{{ Storage::url($gallery->url) }}" alt="front"
                                 class="object-cover w-full h-full rounded-lg" />
                         </div>
                     </div>
-                    <div class="px-2">
-                        <div class="item" data-img="{{ asset('frontend/images/content/showcase-1.back.jpg') }}">
-                            <img src="{{ asset('frontend/images/content/showcase-1.back.jpg') }}" alt="back"
-                                class="object-cover w-full h-full rounded-lg" />
-                        </div>
-                    </div>
-                    <div class="px-2">
-                        <div class="item" data-img="{{ asset('frontend/images/content/showcase-1.rear.jpg') }}">
-                            <img src="{{ asset('frontend/images/content/showcase-1.rear.jpg') }}" alt="rear"
-                                class="object-cover w-full h-full rounded-lg" />
-                        </div>
-                    </div>
-                    <div class="px-2">
-                        <div class="item" data-img="{{ asset('frontend/images/content/showcase-1.side.jpg') }}">
-                            <img src="{{ asset('frontend/images/content/showcase-1.side.jpg') }}" alt="side"
-                                class="object-cover w-full h-full rounded-lg" />
-                        </div>
-                    </div>
-                    <div class="px-2">
-                        <div class="item" data-img="{{ asset('frontend/images/content/showcase-1.top.jpg') }}">
-                            <img src="{{ asset('frontend/images/content/showcase-1.top.jpg') }}" alt="top"
-                                class="object-cover w-full h-full rounded-lg" />
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="preview">
                     <div class="item rounded-lg h-full overflow-hidden">
-                        <img src="{{ asset('frontend/images/content/showcase-1.front.jpg') }}" alt="front"
-                            class="object-cover w-full h-full rounded-lg" />
+                        <img src="{{ $product->productGalleries()->exists() ? Storage::url($product->productGalleries->first()->url) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}"
+                            alt="front" class="object-cover w-full h-full rounded-lg" />
                     </div>
                 </div>
             </div>
         </div>
         <div class="flex-1 px-4 md:p-6">
-            <h2 class="text-5xl font-semibold">Chair Thatty</h2>
-            <p class="text-xl">IDR 12.000.000</p>
+            <h2 class="text-5xl font-semibold">{{ $product->name }}</h2>
+            <p class="text-xl">IDR {{ number_format($product->price) }}</p>
 
-            <a href="cart.html"
-                class="transition-all duration-200 bg-pink-400 text-black focus:bg-black focus:text-pink-400 rounded-full px-8 py-3 mt-4 inline-flex"><svg
-                    class="fill-current mr-3" width="26" height="24" viewBox="0 0 26 24">
+            <a href="{{ route('cart') }}"
+                class="transition-all duration-200 bg-pink-400 text-black focus:bg-black focus:text-pink-400 rounded-full px-8 py-3 mt-4 inline-flex">
+                <svg class="fill-current mr-3" width="26" height="24" viewBox="0 0 26 24">
                     <path
                         d="M10.8754 18.7312C9.61762 18.7312 8.59436 19.7115 8.59436 20.9164C8.59436 22.1214 9.61762 23.1017 10.8754 23.1017C12.1331 23.1017 13.1564 22.1214 13.1564 20.9164C13.1563 19.7115 12.1331 18.7312 10.8754 18.7312ZM10.8754 21.8814C10.3199 21.8814 9.86796 21.4485 9.86796 20.9163C9.86796 20.3842 10.3199 19.9512 10.8754 19.9512C11.4308 19.9512 11.8828 20.3842 11.8828 20.9163C11.8828 21.4486 11.4308 21.8814 10.8754 21.8814Z" />
                     <path
@@ -92,14 +70,7 @@
 
             <h6 class="text-xl font-semibold mb-4">About the product</h6>
             <p class="text-xl leading-7 mb-6">
-                Tailored to a level of perfection synonymous with that of a Savile
-                Row suit and with understated quality in the detail, Jetty has been
-                influenced by timeless 1950s style.
-            </p>
-            <p class="text-xl leading-7">
-                Providing a subtle nod to the past, Jetty also provides a perfect
-                solution for the way we work today. A comprehensive product family,
-                Jetty features a variety of elegant chairs and sofas.
+                {!! $product->description !!}
             </p>
         </div>
     </div>
@@ -115,58 +86,21 @@
             </h3>
         </div>
         <div class="flex overflow-x-auto mb-4 -mx-3">
+            @foreach ($recommendations as $recommendation)
             <div class="px-3 flex-none" style="width: 320px">
                 <div class="rounded-xl p-4 pb-8 relative bg-white">
                     <div class="rounded-xl overflow-hidden card-shadow w-full h-36">
-                        <img src="{{ asset('frontend/images/content/chair-1.png') }}" alt=""
-                            class="w-full h-full object-cover object-center" />
+                        <img src="{{ $recommendation->productGalleries()->exists() ? Storage::url($recommendation->productGalleries->first()->url) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}"
+                            alt="{{ $recommendation->name }}" class="w-full h-full object-cover object-center" />
                     </div>
-                    <h5 class="text-lg font-semibold mt-4">Cangkir Mauttie</h5>
-                    <span class="">IDR 89.300.000</span>
-                    <a href="details.html" class="stretched-link">
+                    <h5 class="text-lg font-semibold mt-4">{{ $recommendation->name }}</h5>
+                    <span class="">IDR {{ number_format($recommendation->price) }}</span>
+                    <a href="{{ route('details', $recommendation->slug) }}" class="stretched-link">
                         <!-- fake children -->
                     </a>
                 </div>
             </div>
-            <div class="px-3 flex-none" style="width: 320px">
-                <div class="rounded-xl p-4 pb-8 relative bg-white">
-                    <div class="rounded-xl overflow-hidden card-shadow w-full h-36">
-                        <img src="{{ asset('frontend/images/content/chair-2.png') }}" alt=""
-                            class="w-full h-full object-cover object-center" />
-                    </div>
-                    <h5 class="text-lg font-semibold mt-4">Saman Kakka</h5>
-                    <span class="">IDR 14.500.399</span>
-                    <a href="details.html" class="stretched-link">
-                        <!-- fake children -->
-                    </a>
-                </div>
-            </div>
-            <div class="px-3 flex-none" style="width: 320px">
-                <div class="rounded-xl p-4 pb-8 relative bg-white">
-                    <div class="rounded-xl overflow-hidden card-shadow w-full h-36">
-                        <img src="{{ asset('frontend/images/content/chair-3.png') }}" alt=""
-                            class="w-full h-full object-cover object-center" />
-                    </div>
-                    <h5 class="text-lg font-semibold mt-4">Lino Dino</h5>
-                    <span class="">IDR 22.000.000</span>
-                    <a href="details.html" class="stretched-link">
-                        <!-- fake children -->
-                    </a>
-                </div>
-            </div>
-            <div class="px-3 flex-none" style="width: 320px">
-                <div class="rounded-xl p-4 pb-8 relative bg-white">
-                    <div class="rounded-xl overflow-hidden card-shadow w-full h-36">
-                        <img src="{{ asset('frontend/images/content/chair-1.png') }}" alt=""
-                            class="w-full h-full object-cover object-center" />
-                    </div>
-                    <h5 class="text-lg font-semibold mt-4">Syail Ammeno</h5>
-                    <span class="">IDR 6.399.999</span>
-                    <a href="details.html" class="stretched-link">
-                        <!-- fake children -->
-                    </a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
