@@ -83,9 +83,9 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Transaction $transaction)
     {
-        //
+        return view('pages.dashboard.transaction.edit', compact('transaction'));
     }
 
     /**
@@ -95,9 +95,18 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Transaction $transaction)
     {
-        //
+        $validated = $request->validate([
+            'status' => 'required|in:PENDING,CHALLENGE,SUCCESS,FAILED,SHIPPING,SHIPPED',
+        ]);
+
+        try {
+            $transaction->update($validated);
+        } catch (\Throwable $th) {
+            return redirect()->route('dashboard.transaction.index')->with('failed', 'Failed to update data' . $th->getMessage());
+        }
+        return redirect()->route('dashboard.transaction.index')->with('success', 'Successfully updated status');
     }
 
     /**

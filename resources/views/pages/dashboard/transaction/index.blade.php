@@ -17,7 +17,7 @@
                     {data: 'phone', name: 'phone'},
                     {data: 'courrier', name: 'courier'},
                     {data: 'total_price', name: 'total_price'},
-                    {data: 'payment', name: 'payment'},
+                    {data: 'status', name: 'status'},
                     {data: 'action', name: 'action', orderable: false, searchable: false, width: '20%'},
                 ]
             });
