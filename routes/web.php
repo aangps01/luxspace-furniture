@@ -41,6 +41,7 @@ Route::middleware([
 
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function () {
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/chart', [FrontendController::class, 'addToChart'])->name('chart');
 
     Route::middleware(['admin'])->group(function () {
         // admin routes
