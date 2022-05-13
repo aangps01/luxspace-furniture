@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,29 @@ class FrontendController extends Controller
 
     public function cart()
     {
-        return view('pages.cart');
+        $carts = Cart::with('product.productGalleries')->where('user_id', auth()->user()->id)->get();
+        return view('pages.cart', compact('carts'));
+    }
+
+    public function addCart(Product $product)
+    {
+        $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
+        if (!$cart) {
+            Cart::create([
+                'product_id' => $product->id,
+                'user_id' => auth()->user()->id,
+            ]);
+        }
+        return redirect()->route('cart');
+    }
+
+    public function removeCart(Product $product)
+    {
+        $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
+        if ($cart) {
+            $cart->delete();
+        }
+        return redirect()->route('cart');
     }
 
     public function details(Product $product)

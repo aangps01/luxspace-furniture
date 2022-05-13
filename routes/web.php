@@ -23,9 +23,7 @@ use App\Http\Controllers\UserController;
 // });
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
-Route::get('/cart', [FrontendController::class, 'cart'])->name('cart');
 Route::get('/details/{product}', [FrontendController::class, 'details'])->name('details');
-Route::get('/checkout/success', [FrontendController::class, 'success'])->name('chekout-success');
 
 
 Route::middleware([
@@ -39,9 +37,15 @@ Route::middleware([
 });
 
 
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/cart', [FrontendController::class, 'cart'])->name('cart');
+    Route::post('/cart/{product}', [FrontendController::class, 'addCart'])->name('cart.add');
+    Route::delete('/cart/{product}', [FrontendController::class, 'removeCart'])->name('cart.remove');
+    Route::get('/success', [FrontendController::class, 'success'])->name('success');
+});
+
+
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function () {
-    // Route::get('/', [DashboardController::class, 'index'])->name('index');
-    Route::get('/chart', [FrontendController::class, 'addToChart'])->name('chart');
 
     Route::middleware(['admin'])->group(function () {
         // admin routes
