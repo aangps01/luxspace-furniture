@@ -41,6 +41,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/cart', [FrontendController::class, 'cart'])->name('cart');
     Route::post('/cart/{product}', [FrontendController::class, 'addCart'])->name('cart.add');
     Route::delete('/cart/{product}', [FrontendController::class, 'removeCart'])->name('cart.remove');
+    Route::post('/checkout', [FrontendController::class, 'checkout'])->name('checkout');
     Route::get('/success', [FrontendController::class, 'success'])->name('success');
 });
 
